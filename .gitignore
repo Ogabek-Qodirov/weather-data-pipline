@@ -1,17 +1,5 @@
-# Python
-__pycache__/
-*.py[cod]
-
-# Virtual environment
-.venv/
-venv/
-
-# Secrets
 .env
-*.env
-
-# Jupyter
-.ipynb_checkpoints/
-
-# Temporary files
+.venv/
+__pycache__/
+*.pyc
 *.log

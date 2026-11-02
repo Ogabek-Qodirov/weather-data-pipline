@@ -1,15 +1,32 @@
+
 # Weather Data Pipeline
 
-An end-to-end Data Engineering project that collects hourly weather data from the Open-Meteo API, transforms and validates it using Python and Pandas, and stores it in a cloud PostgreSQL database.
+An end-to-end data engineering project that extracts weather data from the Open-Meteo API, transforms and validates it using Python and Pandas, and loads it into a PostgreSQL database.
 
 ## Project Overview
 
-The pipeline follows the ETL architecture:
+This pipeline collects hourly weather data for four cities in Uzbekistan:
 
-1. **Extract** — Collect hourly weather data from Open-Meteo API.
-2. **Transform** — Convert JSON responses into Pandas DataFrames and clean the data.
-3. **Validate** — Check missing values, duplicates, and invalid measurements.
-4. **Load** — Store processed weather data in PostgreSQL.
+- Tashkent
+- Urgench
+- Samarkand
+- Bukhara
+
+## Architecture
+
+Open-Meteo API
+      |
+      v
+Python Extraction
+      |
+      v
+Data Transformation (Pandas)
+      |
+      v
+Data Validation
+      |
+      v
+PostgreSQL (Neon)
 
 ## Technologies
 
@@ -18,20 +35,80 @@ The pipeline follows the ETL architecture:
 - Requests
 - PostgreSQL
 - SQLAlchemy
-- Google Colab
-- Neon
+- Neon Database
+- python-dotenv
+- Git and GitHub
 
-## Project Status
+## Features
 
-Currently developing the API extraction and data transformation stages.
+- Extracts hourly weather data from Open-Meteo API
+- Processes multiple cities
+- Transforms API responses into structured DataFrames
+- Validates data quality
+- Loads data into PostgreSQL
+- Uses UPSERT to prevent duplicate city/time records
+- Implements logging and error handling
+- Supports SQL analytics
 
-## Data Source
+## Project Structure
 
-[Open-Meteo API](https://open-meteo.com/)
+```text
+src/
+    extract.py
+    transform.py
+    validate.py
+    load.py
 
-## Project Goals
+main.py
+requirements.txt
+README.md
+```
 
-- Build an end-to-end ETL pipeline.
-- Practice API integration and data processing.
-- Work with cloud PostgreSQL databases.
-- Develop practical Data Engineering skills.
+## Installation
+
+Clone the repository:
+
+```bash
+git clone YOUR_REPOSITORY_URL
+cd 02-weather-data-pipline
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Create a `.env` file:
+
+```env
+DATABASE_URL=your_neon_database_url
+```
+
+Run the pipeline:
+
+```bash
+python main.py
+```
+
+## Database
+
+The pipeline stores weather records in PostgreSQL.
+
+Each record contains:
+
+- city
+- time
+- temperature
+- humidity
+- wind_speed
+
+A unique constraint on `(city, time)` supports UPSERT operations.
+
+## Future Improvements
+
+- Automated scheduling
+- Docker containerization
+- Unit testing with pytest
+- Cloud deployment
+- Data visualization dashboard

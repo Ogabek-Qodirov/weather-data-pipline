@@ -2,7 +2,7 @@
 import pandas as pd
 
 
-def transform_weather_data(hourly_data):
+def transform_weather_data(hourly_data, city_name):
     """
     API dan kelgan hourly data ni
     Pandas DataFrame ga aylantiradi.
@@ -10,6 +10,7 @@ def transform_weather_data(hourly_data):
 
     # Kerakli ma'lumotlarni ajratib olamiz
     weather_data = {
+        "city": city_name,
         "time": hourly_data["time"],
         "temperature": hourly_data["temperature_2m"],
         "humidity": hourly_data["relative_humidity_2m"],
