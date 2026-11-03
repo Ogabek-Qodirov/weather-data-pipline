@@ -1,5 +1,6 @@
-import logging
-import time
+import logging  #Insted of writing print we can use logging.info that might be saved into pipline.log file
+import time #Weating (time.sleep(3)) if the pipline does not work it waits 3 second and then try again and
+            #Checking the time how many seconds took to complete this pipline and so on
 
 from src.extract import extract_weather_data
 from src.transform import transform_weather_data
@@ -7,10 +8,10 @@ from src.validate import validate_weather_data
 from src.load import load_weather_data
 
 
-# Logging configuration
+# Logging configuration that can shows where does saves the logging info massages
 logging.basicConfig(
     filename="pipeline.log",
-    level=logging.INFO,
+    level=logging.INFO,   #That can be anything DEBUG, INFO, WARNING, ERROR, CRITICAL
     format="%(asctime)s - %(levelname)s - %(message)s"
 )
 
